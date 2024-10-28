@@ -31,4 +31,8 @@ def add(a: int, b: int):
 def multiply(c: int, d: int):
     return {"product": c * d}
 
+#for lab 6, adding endpoint
+@app.get("/bday/{e}")
+def bday(e:str):
+    return{"birthday": e}
 
