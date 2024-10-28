@@ -36,3 +36,8 @@ def multiply(c: int, d: int):
 def bday(e:str):
     return{"birthday": e}
 
+#adding another
+@app.get("/")
+def zone_apex(): 
+    return{"wassup": "shawty"}
+
