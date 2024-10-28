@@ -37,7 +37,12 @@ def bday(e:str):
     return{"birthday": e}
 
 #adding another
-@app.get("/")
-def zone_apex(): 
+@app.get("/hey")
+def hey(): 
     return{"wassup": "shawty"}
+
+#adding one last one
+@app.get("/bye")
+def bye():
+    return{"goodbye": "see ya, adios, later gator"}
 
