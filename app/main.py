@@ -10,7 +10,7 @@ from mysql.connector import Error
 
 
 DBHOST = "ds2022.cqee4iwdcaph.us-east-1.rds.amazonaws.com"
-DBUSER = "admin"
+DBUSER = "ds2022"
 DBPASS = os.getenv('DBPASS')
 DB = "fbv2sc"
 
@@ -25,6 +25,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+def zone_apex():
+    return {"testing": "done"}
+
 
 @app.get('/genres')
 def get_genres():
