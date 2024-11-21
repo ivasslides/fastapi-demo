@@ -14,9 +14,6 @@ DBUSER = "ds2022"
 DBPASS = os.getenv('DBPASS')
 DB = "fbv2sc"
 
-db = mysql.connector.connect(user=DBUSER, host=DBHOST, password=DBPASS, database=DB)
-cur=db.cursor()
-
 app = FastAPI()
 from fastapi.middleware.cors import CORSMiddleware
 app.add_middleware(
@@ -33,6 +30,8 @@ def zone_apex():
 
 @app.get('/genres')
 def get_genres():
+    db = mysql.connector.connent(user=DBUSER, host=DBHOST, password=DBPASS, database=DB)
+    cur = db.cursor()
     query = "SELECT * FROM genres ORDER BY genreid;"
     try:    
         cur.execute(query)
@@ -44,9 +43,14 @@ def get_genres():
         return(json_data)
     except Error as e:
         return {"Error": "MySQL Error: " + str(e)}
+    finally: 
+        cur.close()
+        db.close()
 
 @app.get('/songs')
 def get_songs(): 
+    db = mysql.connector.connect(suer=DBUSER, host=DBHOST, password=DBPASS, database=DB)
+    cur = db.cursor()
     query = "SELECT songs.title, songs.album, songs.artist, songs.year, songs.file AS file, songs.image AS image, songs.genre, genres.genre FROM songs JOIN genres WHERE songs.genre = genres.genreid;"
     try: 
         cur.execute(query)
@@ -58,6 +62,9 @@ def get_songs():
         return(json_data)
     except Error as e: 
         return {"Error": "MySQL Error: " + str(e)}
+    finally: 
+        cur.close()
+        db.close() 
 
 
 
