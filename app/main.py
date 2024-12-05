@@ -40,13 +40,13 @@ def get_genres():
         json_data=[]
         for result in results:
             json_data.append(dict(zip(headers,result)))
-        cur.close()
-        db.close()
         return(json_data)
     except Error as e:
+        print("MySQL Error: " + str(e))
+        return None
+    finally: 
         cur.close()
         db.close()
-        return {"Error": "MySQL Error: " + str(e)}
 
 
 @app.get('/songs')
@@ -61,13 +61,13 @@ def get_songs():
         json_data=[]
         for result in results:
             json_data.append(dict(zip(headers,result)))
-        cur.close()
-        db.close()
         return(json_data)
     except Error as e: 
+        print("MySQL Error: " + str(e))
+        return None
+    finally: 
         cur.close()
-        db.close() 
-        return {"Error": "MySQL Error: " + str(e)}
+        db.close()
 
 
 
